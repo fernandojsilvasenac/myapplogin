@@ -1,17 +1,29 @@
-import { 
-    StyleSheet, 
-    Text, 
-    TouchableOpacity, 
-    TouchableOpacityProps } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    TouchableOpacityProps
+} from "react-native";
 
 type ButtonProps = TouchableOpacityProps & {
     label: string;
 }    
 
-export function Button({ label, style, ...rest} : ButtonProps){
+export function Button({ label, style, disabled, ...rest} : ButtonProps){
     return(
-        <TouchableOpacity style={[styles.container, style]} {...rest}>
-            <Text style={styles.label}>{label}</Text>
+        <TouchableOpacity 
+            style={[
+                styles.container, 
+                disabled && styles.containerDisabled,
+                style
+            ]} 
+            activeOpacity={0.7}
+            disabled={disabled}
+            {...rest}>
+            <Text style={[
+                    styles.label, 
+                    disabled && styles.labelDisabled
+                ]}>{label}</Text>
         </TouchableOpacity>
     )
 }
@@ -28,6 +40,12 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize:16,
         fontWeight:600
+    },
+    containerDisabled: {
+        backgroundColor: "#AAB8FF", //mais apagado
+    },
+    labelDisabled:{
+        color: "#F2F2F2"
     }
 
 })

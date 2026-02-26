@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 
 import { Link } from "expo-router";
-import { useState } from "react";
+import { useState } from "react"; //hook
 import {
     Alert,
     Image,
@@ -13,6 +13,8 @@ import {
 
 export default function Index(){
     const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    
 
     function handleSignIn(){
         console.log(email)
@@ -28,13 +30,14 @@ export default function Index(){
         <ScrollView 
             contentContainerStyle={{ flexGrow:1 }}
             showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
         >
             <View style={styles.container}>
                 <Image 
                     source={require('@/assets/image1.png')}
                     style={styles.ilustration} 
                 />
-                <Text style={styles.title}>Entrar {email}</Text>
+                <Text style={styles.title}>Entrar {senha}</Text>
                 <Text style={styles.subtitle}>Acesse sua conta com e-mail e senha</Text>
                 <View style={styles.form}>
                     <Input placeholder="E-mail" 
@@ -42,7 +45,10 @@ export default function Index(){
                         // onChangeText={(text) => console.log(text)}
                         onChangeText={setEmail}
                     />
-                    <Input placeholder="Senha" secureTextEntry/>
+                    <Input placeholder="Senha" 
+                        secureTextEntry
+                        onChangeText={setSenha}
+                        />
                     <Button label="Entrar" onPress={handleSignIn} />
                     {/* <Button label="Entrar" style={{ backgroundColor: "green"}}/> */}
                 </View>
